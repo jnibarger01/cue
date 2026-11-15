@@ -1,3 +1,4 @@
+import os
 import re
 from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import parse_qs, urlsplit
@@ -9,6 +10,7 @@ from youtube_transcript_api import (
     AgeRestricted, CouldNotRetrieveTranscript, NoTranscriptFound, RequestBlocked,
     TranscriptsDisabled, VideoUnavailable, VideoUnplayable, YouTubeTranscriptApi,
 )
+from youtube_transcript_api.proxies import GenericProxyConfig
 
 app = Flask(__name__, static_folder="public/static", static_url_path="/static")
 app.config["MAX_CONTENT_LENGTH"] = 32 * 1024
@@ -62,7 +64,9 @@ def lookup(url):
 
     try:
         with CaptionSession() as session:
-            tracks = YouTubeTranscriptApi(http_client=session).list(video_id)
+            proxy_url = os.environ.get("YOUTUBE_PROXY_URL")
+            proxy = GenericProxyConfig(https_url=proxy_url) if proxy_url else None
+            tracks = YouTubeTranscriptApi(http_client=session, proxy_config=proxy).list(video_id)
             try:
                 track = tracks.find_transcript(["en"])
             except NoTranscriptFound:
@@ -77,7 +81,7 @@ def lookup(url):
     except (VideoUnavailable, VideoUnplayable, AgeRestricted):
         error = "This video may be private, deleted, or restricted."
     except RequestBlocked:
-        error = "YouTube blocked this server's requests. Try running Cue locally."
+        error = "YouTube blocked this server's requests. The site owner needs to configure a working YouTube proxy."
     except (CouldNotRetrieveTranscript, RequestException):
         error = "YouTube could not return captions right now. Try again shortly."
     return {**item, "error": error}
