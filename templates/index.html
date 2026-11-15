@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Cue · YouTube transcripts</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header class="wrap masthead">
+    <span class="brand"><span class="mark" aria-hidden="true">❞</span>Cue</span>
+    <button id="theme" class="theme" type="button" aria-label="Toggle dark mode" aria-pressed="false">☾</button>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <h1 id="title">YouTube transcripts.</h1>
+        <p>Paste YouTube links to retrieve and copy their captions.</p>
+      </div>
+      <div class="wave" aria-hidden="true">
+        {% for height in [6, 10, 18, 34, 56, 78, 56, 34, 19, 55, 20, 20, 52, 82, 112, 140, 112, 82, 48, 19, 18, 55, 23, 28, 16, 8, 6] %}
+        <i style="--height: {{ height }}px"></i>
+        {% endfor %}
+      </div>
+    </section>
+
+    <form id="form" class="panel" data-max-links="{{ max_links }}">
+      <div class="row">
+        <label for="urls">Video links</label>
+        <span id="count" class="muted">0 / {{ max_links }} links</span>
+      </div>
+      <textarea id="urls" rows="4" spellcheck="false" autocapitalize="off"
+        aria-describedby="hint" placeholder="https://www.youtube.com/watch?v=…"></textarea>
+      <p id="hint" class="muted">One YouTube URL per line.</p>
+      <p id="error" class="error" role="alert"></p>
+      <div class="row actions">
+        <button id="clear" type="button">Clear</button>
+        <button id="submit" class="primary" type="submit">
+          <span id="submit-label">Get Transcripts</span><span class="indicator" aria-hidden="true"></span>
+        </button>
+      </div>
+    </form>
+
+    <section class="results" aria-labelledby="results-title">
+      <div class="row">
+        <h2 id="results-title">Transcripts</h2>
+        <button id="copy-all" type="button" disabled>Copy All</button>
+      </div>
+      <p id="status" class="muted" role="status">Your transcripts will appear here.</p>
+      <p id="copy-status" class="visually-hidden" role="status"></p>
+      <div id="cards" class="cards"></div>
+    </section>
+
+    <template id="result-card">
+      <article class="panel card">
+        <div class="card-head">
+          <span class="play" aria-hidden="true"></span>
+          <div>
+            <h3 class="video-url"></h3>
+            <p class="meta muted"></p>
+          </div>
+          <button class="copy" type="button">Copy</button>
+        </div>
+        <div class="caption"></div>
+      </article>
+    </template>
+  </main>
+</body>
+</html>
