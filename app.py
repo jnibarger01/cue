@@ -10,7 +10,7 @@ from youtube_transcript_api import (
     TranscriptsDisabled, VideoUnavailable, VideoUnplayable, YouTubeTranscriptApi,
 )
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="public/static", static_url_path="/static")
 app.config["MAX_CONTENT_LENGTH"] = 32 * 1024
 MAX_LINKS = 10
 VIDEO_ID = re.compile(r"[A-Za-z0-9_-]{11}")
