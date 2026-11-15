@@ -3,6 +3,10 @@
 
 import getpass
 import sys
+from pathlib import Path
+
+# Direct script execution puts scripts/ on sys.path, not the repository root.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from security import hash_password
 
