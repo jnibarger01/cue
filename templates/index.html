@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
+  <meta name="csrf-token" content="{{ csrf_token }}">
   <title>Cue · YouTube transcripts</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -12,7 +13,13 @@
 <body>
   <header class="wrap masthead">
     <span class="brand"><span class="mark" aria-hidden="true">❞</span>Cue</span>
-    <button id="theme" class="theme" type="button" aria-label="Toggle dark mode" aria-pressed="false">☾</button>
+    <div class="account-actions">
+      <form method="post" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button class="logout" type="submit">Sign out</button>
+      </form>
+      <button id="theme" class="theme" type="button" aria-label="Toggle dark mode" aria-pressed="false">☾</button>
+    </div>
   </header>
 
   <main class="wrap">

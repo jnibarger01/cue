@@ -99,10 +99,17 @@ form.addEventListener("submit", async (event) => {
   try {
     const response = await fetch("/api/transcripts", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]')?.content || "",
+      },
       body: JSON.stringify({ urls: urlsToFetch }),
     });
     const data = await response.json().catch(() => ({}));
+    if (response.status === 401) {
+      window.location.assign("/login");
+      return;
+    }
     if (!response.ok || !Array.isArray(data.results)) {
       error.textContent = data.error || "The server could not complete the request. Try again.";
       status.textContent = "";
