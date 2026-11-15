@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Cue · YouTube transcripts</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;600;700&display=swap">
+  <style>
+    :root { color-scheme: light dark; }
+    body { background: light-dark(#f6f2eb, #1e1a17); color: light-dark(#261e18, #f7eee4); font: 1rem/1.6 Inter, system-ui, sans-serif; margin: 0 auto; width: min(86%, 55rem); }
+    header { border-bottom: 1px solid currentColor; padding-block: 1rem; font: 2.6rem "Instrument Serif", Georgia, serif; }
+    main { padding-block: 2.5rem; }
+    h1, h2 { font: 400 3rem/1 "Instrument Serif", Georgia, serif; margin: 0; }
+    h1 { font-size: clamp(3.4rem, 9vw, 7rem); }
+    section { margin-top: 2rem; background: light-dark(#fffcf8, #29231f); border: 1px solid light-dark(#cbb9a5, #6e5c4e); border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); }
+    pre { overflow-x: auto; background: light-dark(#f6f2eb, #1e1a17); padding: 1rem; border-radius: 8px; }
+    a { color: light-dark(#a23a24, #ffa083); }
+  </style>
+</head>
+<body>
+  <header>Cue</header>
+  <main>
+    <h1>YouTube transcripts.</h1>
+    <p>Paste up to ten YouTube video links to retrieve and copy their captions.</p>
+    <section aria-labelledby="setup">
+      <h2 id="setup">Run Cue locally</h2>
+      <p>Transcript retrieval runs through Cue’s Flask server. With Git and uv installed, run these commands in Bash or Zsh.</p>
+      <pre><code>git clone https://github.com/jnibarger01/cue.git
+cd cue
+uv venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
+python app.py</code></pre>
+      <p>Once Flask starts, open <a href="http://127.0.0.1:5000/">Cue on your computer</a>.</p>
+      <a href="https://github.com/jnibarger01/cue">View source on GitHub</a>
+    </section>
+  </main>
+</body>
+</html>
