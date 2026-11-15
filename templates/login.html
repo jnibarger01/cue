@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Sign in · Cue</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="wrap masthead">
+    <span class="brand"><span class="mark" aria-hidden="true">❞</span>Cue</span>
+  </header>
+  <main class="wrap auth-main">
+    <section class="auth-panel panel" aria-labelledby="title">
+      <p class="eyebrow">PRIVATE WORKSPACE</p>
+      <h1 id="title">Welcome back.</h1>
+      <p class="muted">Sign in to access your transcript workspace.</p>
+      {% if error %}
+      <p class="auth-error" role="alert">{{ error }}</p>
+      {% endif %}
+      <form method="post" action="{{ url_for('login') }}" class="auth-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required autofocus>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button class="primary auth-submit" type="submit">Sign in <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="auth-note muted">Single-user access. Account creation is disabled.</p>
+    </section>
+  </main>
+</body>
+</html>

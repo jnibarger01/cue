@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Setup required · Cue</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="wrap masthead">
+    <span class="brand"><span class="mark" aria-hidden="true">❞</span>Cue</span>
+  </header>
+  <main class="wrap auth-main">
+    <section class="auth-panel panel">
+      <p class="eyebrow">SETUP REQUIRED</p>
+      <h1>Cue is locked.</h1>
+      <p class="muted">Single-user authentication is not configured. The application is failing closed rather than allowing public access.</p>
+      <p class="setup-vars">Configure <code>CUE_USERNAME</code>, <code>CUE_PASSWORD_HASH</code>, and <code>CUE_SESSION_SECRET</code> as sensitive Vercel environment variables, then redeploy.</p>
+    </section>
+  </main>
+</body>
+</html>

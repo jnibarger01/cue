@@ -1,0 +1,27 @@
+[Unit]
+Description=Cue private YouTube transcript worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/projects/cue
+EnvironmentFile=%h/.config/cue/worker.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=%h/projects/cue/.venv/bin/gunicorn --bind 127.0.0.1:8787 --workers 1 --threads 8 --timeout 90 worker:app
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=read-only
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=default.target

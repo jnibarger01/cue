@@ -125,3 +125,27 @@ h2 { font-size: clamp(2.7rem, 5.4vw, 5rem); letter-spacing: -.025em; line-height
   .card-head { grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
   .play { display: none; }
 }
+
+.account-actions { display: flex; align-items: center; gap: 12px; }
+.account-actions form { padding: 0; box-shadow: none; }
+.logout { min-height: 42px; padding-inline: 14px; }
+.auth-main { display: grid; place-items: center; min-height: calc(100vh - 110px); padding-block: 36px; }
+.auth-panel { width: min(100%, 520px); padding: clamp(24px, 5vw, 42px); box-shadow: var(--shadow); }
+.auth-panel h1 { margin: 4px 0 12px; font-size: clamp(3.4rem, 8vw, 5.4rem); }
+.eyebrow { margin: 0; color: var(--accent); font-size: .76rem; font-weight: 700; letter-spacing: .16em; }
+.auth-form { display: grid; gap: 10px; margin-top: 28px; padding: 0; box-shadow: none; }
+.auth-form label { margin-top: 8px; font-size: .98rem; }
+.auth-form input {
+  width: 100%; min-height: 50px; padding: 12px 14px;
+  border: 1px solid var(--line); border-radius: 9px;
+  background: var(--paper); color: var(--ink); font: inherit;
+}
+.auth-submit { width: 100%; margin-top: 14px; }
+.auth-error { padding: 12px 14px; border: 1px solid var(--accent); border-radius: 9px; color: var(--accent); font-weight: 600; }
+.auth-note { margin: 22px 0 0; font-size: .88rem; }
+.setup-vars { margin-top: 24px; padding: 14px; border: 1px solid var(--line); border-radius: 9px; overflow-wrap: anywhere; }
+.setup-vars code { font-size: .88em; }
+@media (max-width: 520px) {
+  .account-actions { gap: 6px; }
+  .logout { min-height: 40px; padding-inline: 10px; }
+}
